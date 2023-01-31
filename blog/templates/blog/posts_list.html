@@ -1,5 +1,10 @@
-{% for post in posts_list %}
-    {{ post.title }}
+{% extends '_base.html' %}
+
+{% block page_title %}Post List{% endblock page_title %}
+
+{% block content %}
+    {% for post in posts_list %}
+    <h1>{{ post.title }}</h1>
     <br>
     {{ post.text }}
     <br>
@@ -7,4 +12,6 @@
     <br>
     <p>-----</p>
 
-{% endfor %}
+    {% endfor %}
+
+{% endblock content %}
