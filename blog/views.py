@@ -6,7 +6,7 @@ from .forms import NewPostForm
 
 
 def post_list_view(request):
-    posts_list = Post.objects.filter(status='pub').order_by('-datetime_created')
+    posts_list = Post.objects.filter(status='pub').order_by('-datetime_modified')
     return render(request, 'blog/posts_list.html', {'posts_list': posts_list})
 
 
@@ -40,7 +40,14 @@ def post_edit_view(request, pk):
     return render(request, 'blog/post_create.html', context={'form': form})
 
 
+def post_delete_view(request, pk):
+    post = get_object_or_404(Post, pk=pk)
 
+    if request.method == 'POST':
+        post.delete()
+        return redirect('posts_list')
+
+    return render(request, 'blog/post_delete.html', context={'post': post})
 
 
 
