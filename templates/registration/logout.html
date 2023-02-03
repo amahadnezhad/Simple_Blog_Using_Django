@@ -1,0 +1,17 @@
+{% extends '_base.html' %}
+{% block page_title %}Logout{% endblock page_title %}
+{% block content %}
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-9">
+                <div class="card shadow my-3 p-5">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <h2>Are You Sure To Logout?</h2>
+                        <button class="btn btn-danger" type="submit">Logout</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
