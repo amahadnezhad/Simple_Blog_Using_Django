@@ -20,18 +20,9 @@ class PostDetailView(generic.DetailView):
     context_object_name = 'post'
 
 
-def post_create_view(request):
-    if request.method == 'POST':  # Post Request
-        form = NewPostForm(request.POST)
-        if form.is_valid():
-            form.save()
-            form = NewPostForm()
-            return redirect('posts_list')
-
-    else:  # Get Request
-        form = NewPostForm()
-
-    return render(request, 'blog/post_create.html', context={'form': form})
+class PostCreateView(generic.CreateView):
+    form_class = NewPostForm
+    template_name = 'blog/post_create.html'
 
 
 def post_edit_view(request, pk):
@@ -53,7 +44,3 @@ def post_delete_view(request, pk):
         return redirect('posts_list')
 
     return render(request, 'blog/post_delete.html', context={'post': post})
-
-
-
-
