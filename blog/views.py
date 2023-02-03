@@ -1,9 +1,8 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.models import User
+from django.urls import reverse_lazy
 from django.views import generic
 
 from .models import Post
-from .forms import NewPostForm
+from .forms import PostForm
 
 
 class PostListView(generic.ListView):
@@ -21,33 +20,17 @@ class PostDetailView(generic.DetailView):
 
 
 class PostCreateView(generic.CreateView):
-    form_class = NewPostForm
+    form_class = PostForm
     template_name = 'blog/post_create.html'
 
 
 class PostEditView(generic.UpdateView):
     model = Post
-    form_class = NewPostForm
+    form_class = PostForm
     template_name = 'blog/post_create.html'
 
 
-
-# def post_edit_view(request, pk):
-#     post = get_object_or_404(Post, pk=pk)
-#     form = NewPostForm(request.POST or None, instance=post)
-#
-#     if form.is_valid():
-#         form.save()
-#         return redirect('posts_list')
-#
-#     return render(request, 'blog/post_create.html', context={'form': form})
-
-
-def post_delete_view(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-
-    if request.method == 'POST':
-        post.delete()
-        return redirect('posts_list')
-
-    return render(request, 'blog/post_delete.html', context={'post': post})
+class PostDeleteView(generic.DeleteView):
+    model = Post
+    template_name = 'blog/post_delete.html'
+    success_url = reverse_lazy('posts_list')
