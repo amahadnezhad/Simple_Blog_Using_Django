@@ -12,7 +12,7 @@
                         <p class="small text-muted mt-2">By: {{ post.author }}</p>
                         <a href="{% url 'post_edit' post.id %}"><div class="btn btn-sm btn-warning">Edit</div></a>
                         <a href="{% url 'post_delete' post.id %}"><div class="btn btn-sm btn-danger">Delete</div></a>
-                        <p class="mt-2">{{ post.text|safe }}</p>
+                        <p class="mt-2">{{ post.text }}</p>
                     </span>
                 </div>
 
