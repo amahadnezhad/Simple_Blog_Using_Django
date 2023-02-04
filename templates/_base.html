@@ -31,7 +31,7 @@
 
                 Welcome {{ user.username }} | <a class="text-light" href="{% url 'logout' %}">Logout</a>
             {% else %}
-                <a class="text-light" href="{% url 'login' %}">Login</a>| <a class="text-light" href="{% url 'signup' %}">SignUp</a>
+                <a class="text-light" href="{% url 'login' %}">Login</a> | <a class="text-light" href="{% url 'signup' %}">SignUp</a>
             {% endif %}
         </div>
     </div>
