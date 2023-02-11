@@ -10,11 +10,10 @@
                 {% for post in posts_list %}
                     <div class="card shadow-sm my-3">
                         <div class="card-body">
-                            <h5 class="card-title">{{ post.title }}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted small py-2">By: {{ post.author}}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted small py-2">{{ post.datetime_created }}</h6>
+                            <h5 class="card-title">{{ post.title|capfirst }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted small py-2">By: {{ post.author|capfirst}} | {{ post.datetime_created }}</h6>
                             <p class="card-text py-3">
-                                {{ post.text }}
+                                {{ post.text|truncatewords:20 }}
                             </p>
                             <a href="{% url 'post_detail' post.id %}"><div class="btn btn-sm btn-success">Read More</div></a>
                         </div>
