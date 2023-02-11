@@ -1,4 +1,6 @@
 {% extends '_base.html' %}
+{% load crispy_forms_tags %}
+
 {% block page_title %}Post detail{% endblock page_title %}
 
 {% block content %}
@@ -22,6 +24,7 @@
                         {% for comment in comments %}
                             <div class="border-bottom mb-3">
                                 <h5 class="mb-3">{{ comment.user.username|capfirst }}:</h5>
+                                <p class="text-secondary">Time Added: {{ comment.datetime_created }}</p>
                                 <p>
                                     {{ comment.text|linebreaks }}
                                 </p>
@@ -35,21 +38,11 @@
                 <div class="card shadow my-3 p-5">
                     <h3>Add new comment:</h3>
                     <form method="POST">
-                        <div class="form-group py-2">
-                            <label class="py-1" for="author_name">Enter your name:</label>
-                            <input type="text" class="form-control" placeholder="e.g. John Doe" name="author_name">
-                        </div>
-                        <div class="form-group py-2">
-                            <label class="py-1" for="email">Your Email:</label>
-                            <input type="email" class="form-control" placeholder="example@gmail.com" name="email">
-                        </div>
-                        <div class="form-group py-2">
-                            <label class="py-1" for="comment_text">Comment text:</label>
-                            <textarea class="form-control" name="text" rows="3"
-                                      placeholder="Enter your comment text here..."></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
+                        <form method="POST">
+                            {% csrf_token %}
+                            {{ comment_form|crispy }}
+                            <button type="submit" class="btn btn-primary mt-3">ارسال</button>
+                        </form>
                 </div>
             </div>
             <div class="col-3">
